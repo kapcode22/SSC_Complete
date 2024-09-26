@@ -1,13 +1,48 @@
-
 .carousel_container {
-  width: 100%; /* Adjust as needed */
-  height: 33vw; /* Adjust as needed */
+  width: 100%;
+  height: 33vw; /* Adjust as needed for height */
   overflow: hidden;
   position: relative;
-  float: left;
   margin-bottom: 5%;
+  float: left;
 }
 
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.9;
+}
+.img_ani {
+  --c: #7286D3; /* the border color */
+  --b: 10px;    /* the border thickness*/
+  --g: 5px;     /* the gap on hover */
+  
+  padding: calc(var(--g) + var(--b));
+  --_g: #0000 25%,var(--c) 0;
+  background: 
+    conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+     var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+    conic-gradient(            at bottom var(--b) left  var(--b),var(--_g))
+     0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+  transition: .3s, background-position .3s .3s;
+  cursor: pointer;
+}
+img:hover {
+  --_i: 100%;
+  transition: .3s, background-size .3s .3s;
+}
 .carousel_container::after {
   content: "";
   position: absolute;
@@ -17,27 +52,18 @@
   height: 100%;
   background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 1) 100%);
 }
+/* Optional: you can also remove the .carousel-item { flex: 0 0 50%; } if not required */
 
-
-.carousel-item {
-  flex: 0 0 50%; 
-}
-
-.carousel_img {
-  width: 100%;
-  height: 33vw;
-  object-fit: cover;
-  opacity: 0.9;
-}
 
 .club_header {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 65%;
   z-index: 99;
   color: whitesmoke;
   margin-right: 2%;
 }
+
 .club_name{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font: weight 10px;

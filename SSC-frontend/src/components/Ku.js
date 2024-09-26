@@ -6,21 +6,25 @@ import { fetchTeam, fetchEvents } from '../reducers/kuReducer';
 import kstyles from "./ku.module.css";
 import ku_logo from "../images/ku_logo.jpg";
 import Type from "./Typeku";
-import { AiFillInstagram, AiFillLinkedin, AiFillMail, } from "react-icons/ai";
+import { AiFillInstagram, AiFillLinkedin, AiFillMail } from "react-icons/ai";
 
 const Ku = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { team, events, loading, error } = useSelector((state) => state.kuReducer);
-
   const [carouselImages, setCarouselImages] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchTeam());
-    dispatch(fetchEvents());
-    fetchCarouselImages();
+    const fetchData = async () => {
+      await dispatch(fetchTeam());
+      await dispatch(fetchEvents());
+      await fetchCarouselImages();
+    };
+    
+    fetchData();
   }, [dispatch]);
+
   const fetchCarouselImages = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/sliderImages/ku');
@@ -29,6 +33,7 @@ const Ku = () => {
       console.error('Error fetching carousel images:', error);
     }
   };
+
   const handleJoinClick = () => {
     window.location.href = 'https://chat.whatsapp.com/DVChQ1r0P70AbOzvFrGWDg';
   };
@@ -38,59 +43,47 @@ const Ku = () => {
   };
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
+  if (error) return <div>Error: {error.message || 'Something went wrong!'}</div>;
 
   return (
     <div className={kstyles.bodies}>
-
-      <div className={`${kstyles.carousel_container} `}>
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-           {carouselImages && carouselImages.length > 0 ? (
-              carouselImages.map((carouselimage, index) => (
+      <div className={`${kstyles.carousel_container}`}>
+        <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
+          <div className="carousel-inner">
+            {carouselImages && carouselImages.length > 0 ? (
+              carouselImages.map((carouselImage, index) => (
                 <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                  <img src={`http://localhost:5000/${carouselimage.imageUrl.replace(/\\/g, '/')}`} alt="" />
+               <img className={kstyles.carousel_img} src={`http://localhost:5000/${carouselImage.imageUrl.replace(/\\/g, '/')}`} alt="" />
                 </div>
               ))
             ) : (
               <p>No carousel images found.</p>
             )}
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
           </button>
         </div>
       </div>
 
-
       <div className={kstyles.club_header}>
-        <h2 className={kstyles.club_name}>Kashi Utkarsh </h2>
+        <h2 className={kstyles.club_name}>Kashi Utkarsh</h2>
         <div className={kstyles.type}>
-          {" "}<Type />{" "}
+          <Type />
         </div>
       </div>
 
       <div className={`${kstyles.about} ${kstyles.container}`}>
-        <img src={ku_logo} alt="" />
+        <img src={ku_logo} alt="Kashi Utkarsh Logo" />
         <div className={kstyles.aboutContent}>
           <h3>About Us</h3>
           <p className={kstyles.dis}>
-            Kashi Utkarsh, is an initiative led by the IIT BHU students to
-            relieve the challenges faced by underprivileged individuals in areas
-            like Patiya, Kakarmatta, and Lahartara. Centered on improved hygiene
-            and importance of education, the initiative aims to enhance the
-            standard of living and awareness among the less fortunate. Through
-            individual engagement, free medical camps, and awareness
-            campaigns,we strive to address their unique needs and nurture
-            positive transformation within these communities.
+            Kashi Utkarsh is an initiative led by the IIT BHU students to relieve the challenges faced by underprivileged individuals in areas like Patiya, Kakarmatta, and Lahartara. Centered on improved hygiene and the importance of education, the initiative aims to enhance the standard of living and awareness among the less fortunate. Through individual engagement, free medical camps, and awareness campaigns, we strive to address their unique needs and nurture positive transformation within these communities.
           </p>
           <button onClick={handleJoinClick} className={`${kstyles.btn} ${kstyles.btnSecondary}`}>
             Join Us
@@ -113,36 +106,36 @@ const Ku = () => {
                 </button>
               </div>
             </div>
-            <img className={kstyles.img_ani} src={`http://localhost:5000/${event.image.replace(/\\/g, '/')}`} alt="" />
+            <img className={kstyles.img_ani} src={`http://localhost:5000/${event.image.replace(/\\/g, '/')}`} alt={`${event.title} image`} />
             <div className={kstyles.date}></div>
           </div>
         ))}
       </div>
 
       <div className={kstyles.home_container}>
-          <h1 className={kstyles.heading}> Meet Our Team </h1>
-          <div className={kstyles.row}>
+        <h1 className={kstyles.heading}>Meet Our Team</h1>
+        <div className={kstyles.row}>
           {team.map((member, index) => (
             <div className={kstyles.profile_card} key={index}>
               <div className={kstyles.img}>
-                <img src={`http://localhost:5000/${member.image.replace(/\\/g, '/')}`} alt="" />
+                <img src={`http://localhost:5000/${member.image.replace(/\\/g, '/')}`} alt={`${member.name}'s profile`} />
               </div>
               <div className={kstyles.caption}>
                 <h3>{member.name}</h3>
                 <p>{member.post}</p>
                 <div className={kstyles.homePage_icons}>
                   <div className={kstyles.social_icons}>
-                    <a href={member.instaLink}>
+                    <a href={member.instaLink} target="_blank" rel="noopener noreferrer">
                       <AiFillInstagram />
                     </a>
                   </div>
                   <div className={kstyles.social_icons}>
-                    <a href={member.facebookLink}>
+                    <a href={member.facebookLink} target="_blank" rel="noopener noreferrer">
                       <AiFillMail />
                     </a>
                   </div>
                   <div className={kstyles.social_icons}>
-                    <a href={member.linkdinLink}>
+                    <a href={member.linkdinLink} target="_blank" rel="noopener noreferrer">
                       <AiFillLinkedin />
                     </a>
                   </div>
@@ -150,8 +143,8 @@ const Ku = () => {
               </div>
             </div>
           ))}
-          </div>
         </div>
+      </div>
     </div>
   );
 };

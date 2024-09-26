@@ -11,7 +11,7 @@ let store =createStore(combineReducers({
     spcReducer: spcReducer,
     kuReducer: kuReducer,
     hhcReducer: hhcReducer,
-    sahyogReduccer: sahyogReducer
+    sahyogReducer: sahyogReducer
 }),applyMiddleware(thunk))
 
 export default store
