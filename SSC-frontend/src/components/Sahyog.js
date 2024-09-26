@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchTeam, fetchEvents } from '../reducers/sahyogReducer';
 import sstyles from './sahyog.module.css';
 import sahyog from '../images/sahyog_logo.jpg';
-import Type from './Typesahyog';
+import Type from './Type';
 import { AiFillInstagram, AiFillLinkedin, AiFillMail } from "react-icons/ai";
 
 const Sahyog = () => {
@@ -82,7 +82,7 @@ const Sahyog = () => {
       <div className={sstyles.club_header}>
         <h2 className={sstyles.club_name}>Sahyog</h2>
         <div className={sstyles.type}>
-          <Type />
+          <Type text="“Illuminating Minds, Nurturing Futures”"/>
         </div>
       </div>
 

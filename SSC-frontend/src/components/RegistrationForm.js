@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import styles from './RegistrationForm.module.css';
+import rstyles from './RegistrationForm.module.css';
 
 const RegistrationForm = () => {
   const { club, event } = useParams();
@@ -12,6 +12,7 @@ const RegistrationForm = () => {
     branch: ''
   });
   const [error, setError] = useState('');
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -34,46 +35,55 @@ const RegistrationForm = () => {
       }
     }
   };
+
   return (
-    <div className={styles.registrationForm}>
-      <h2>Register for {event} in {club}</h2>
-      {error && <p className={styles.error}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="branch"
-          placeholder="Branch"
-          value={formData.branch}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Submit</button>
-      </form>
+    <div>
+         <div className={rstyles.heading}>
+    <h2>Register for {event} in {club}</h2>
+  </div>
+    <div className={rstyles.registrationForm}>
+     
+      <div className={rstyles.formContainer}>
+        {error && <p className={rstyles.error}>{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="branch"
+            placeholder="Branch"
+            value={formData.branch}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
+    </div>
+  
   );
 };
 

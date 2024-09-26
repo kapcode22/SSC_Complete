@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { fetchTeam, fetchEvents } from '../reducers/spcReducer';
 import styles from './spc.module.css';
 import spc from '../images/spc.jpg';
-import Type from './Typespc';
 import { AiFillInstagram, AiFillLinkedin, AiFillMail } from 'react-icons/ai';
 import axios from 'axios';
+import Type from "./Type";
 
 const Club = () => {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const Club = () => {
       <div className={styles.club_header}>
         <h2 className={styles.club_name}>Social Projects Club</h2>
         <div className={styles.type}>
-          <Type />
+          <Type  text="“Innovate, Empower, Impact: Shaping Futures Together”"/>
         </div>
       </div>
 

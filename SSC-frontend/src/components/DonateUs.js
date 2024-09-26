@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styles from './admin/Transparent.module.css'; // Importing styles from CSS module
 
 const DonateUs = () => {
-
-  
   const [username, setUsername] = useState('');
   const [amount, setAmount] = useState('');
 

@@ -5,7 +5,7 @@ import hstyles from './hhc.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchTeam, fetchEvents } from '../reducers/hhcReducer';
-import Typehhc from "./Typehhc";
+import Type from "./Type";
 import { AiFillInstagram, AiFillLinkedin, AiFillMail } from "react-icons/ai";
 
 const Hhc = () => {
@@ -90,7 +90,7 @@ const Hhc = () => {
       <div className={hstyles.club_header}>
         <h2 className={hstyles.club_name}>Health & Hygiene Club</h2>
         <div className={hstyles.type}>
-          <Typehhc />
+          <Type text="“Promoting Wellness, Cultivating Hygiene”"/>
         </div>
       </div>
 

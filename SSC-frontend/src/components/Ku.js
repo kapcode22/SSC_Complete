@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchTeam, fetchEvents } from '../reducers/kuReducer';
 import kstyles from "./ku.module.css";
 import ku_logo from "../images/ku_logo.jpg";
-import Type from "./Typeku";
+import Type from "./Type";
 import { AiFillInstagram, AiFillLinkedin, AiFillMail } from "react-icons/ai";
 
 const Ku = () => {
@@ -74,7 +74,7 @@ const Ku = () => {
       <div className={kstyles.club_header}>
         <h2 className={kstyles.club_name}>Kashi Utkarsh</h2>
         <div className={kstyles.type}>
-          <Type />
+          <Type text="“Empowering communities, transforming lives”" />
         </div>
       </div>
 
